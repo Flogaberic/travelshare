@@ -1,6 +1,7 @@
 package com.example.travel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +19,17 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         ImageView fleche = findViewById(R.id.imageView8);
+
+        Button deconnexion = findViewById(R.id.button9);
+
+        deconnexion.setOnClickListener(v -> {
+                    SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("isLoggedIn", false);
+                    editor.apply();
+                    Intent intent = new Intent(UserActivity.this, AccueilActivity.class);
+                    startActivity(intent);
+        });
 
         fleche.setOnClickListener(v -> {
             startActivity(new Intent(UserActivity.this, AccueilActivity.class));
