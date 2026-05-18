@@ -18,4 +18,9 @@
 
     </style>
 
+    <style name="Theme.Travel.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
 </resources>

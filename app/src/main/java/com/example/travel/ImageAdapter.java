@@ -15,11 +15,19 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     private List<String> imageUrls;
     private List<String> imageTitles;
     private List<String> imageLikes;
+    private List<String> imageLats;
+    private List<String> imageLngs;
+    private List<String> imageDates;
+    private List<List<String[]>> imageComs;
 
-    public ImageAdapter(List<String> imageUrls, List<String> imageTitles, List<String> imageLikes) {
+    public ImageAdapter(List<String> imageUrls, List<String> imageTitles, List<String> imageLikes, List<String> imageLats, List<String> imageLngs, List<String> imageDates, List<List<String[]>> imageComs) {
         this.imageUrls = imageUrls;
         this.imageTitles = imageTitles;
         this.imageLikes = imageLikes;
+        this.imageLats = imageLats;
+        this.imageLngs = imageLngs;
+        this.imageDates = imageDates;
+        this.imageComs = imageComs;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -47,6 +55,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         String imageUrl = imageUrls.get(position);
         String title = imageTitles.get(position);
         String likes = imageLikes.get(position);
+        String lats = imageLats.get(position);
+        String lngs = imageLngs.get(position);
+        String dates = imageDates.get(position);
 
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl)
@@ -57,9 +68,15 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             intent.putExtra("image_url", imageUrl);
             intent.putExtra("image_title", title);
             intent.putExtra("image_likes", likes);
+            intent.putExtra("image_lats", lats);
+            intent.putExtra("image_lngs", lngs);
+            intent.putExtra("image_dates", dates);
+            intent.putExtra("image_position", position);
+
             v.getContext().startActivity(intent);
 
-            ((Activity) v.getContext()).overridePendingTransition(
+            Activity activity = (Activity) v.getContext();
+            activity.overridePendingTransition(
                     R.anim.slide_in_right,
                     R.anim.slide_out_left
             );

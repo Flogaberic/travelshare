@@ -37,6 +37,10 @@ public class AccueilActivity extends AppCompatActivity {
     List<String> imageUrls = new ArrayList<>();
     List<String> imageTitles = new ArrayList<>();
     List<String> imageLikes = new ArrayList<>();
+    List<String> imageLats = new ArrayList<>();
+    List<String> imageLngs = new ArrayList<>();
+    List<String> imageDates = new ArrayList<>();
+    public static List<List<String[]>> imageComs = new ArrayList<>();
 
     ImageAdapter adapter;
 
@@ -50,7 +54,7 @@ public class AccueilActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-        adapter = new ImageAdapter(imageUrls, imageTitles, imageLikes);
+        adapter = new ImageAdapter(imageUrls, imageTitles, imageLikes, imageLats, imageLngs, imageDates, imageComs);
 
         StaggeredGridLayoutManager layoutManager =
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
@@ -92,7 +96,9 @@ public class AccueilActivity extends AppCompatActivity {
                 new OnBackPressedCallback(true) {
                     @Override
                     public void handleOnBackPressed() {
-                        finish();
+                        Intent intent = new Intent(AccueilActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     }
                 }
@@ -122,10 +128,30 @@ public class AccueilActivity extends AppCompatActivity {
                 String title = obj.getString("title");
                 String imageUrl = obj.getString("image");
                 String imageLike = obj.getString("like");
+                String imageLat = obj.getString("lat");
+                String imageLng = obj.getString("lng");
+                String imageDate = obj.getString("date");
+                JSONArray commentsArray = obj.getJSONArray("comments");
+
+                List<String[]> commentsForImage = new ArrayList<>();
+
+                for (int j = 0; j < commentsArray.length(); j++) {
+
+                    JSONArray commentItem = commentsArray.getJSONArray(j);
+
+                    String text = commentItem.getString(0);
+                    String user = commentItem.getString(1);
+
+                    commentsForImage.add(new String[]{text, user});
+                }
 
                 imageUrls.add(imageUrl);
                 imageTitles.add(title);
                 imageLikes.add(imageLike);
+                imageLats.add(imageLat);
+                imageLngs.add(imageLng);
+                imageDates.add(imageDate);
+                imageComs.add(commentsForImage);
             }
 
             runOnUiThread(() -> adapter.notifyDataSetChanged());
