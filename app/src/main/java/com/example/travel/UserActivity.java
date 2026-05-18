@@ -22,6 +22,19 @@ public class UserActivity extends AppCompatActivity {
 
         Button deconnexion = findViewById(R.id.button9);
 
+        Button notifs = findViewById(R.id.button7);
+        Button publier = findViewById(R.id.button13);
+
+        publier.setOnClickListener(v -> {
+            startActivity(new Intent(UserActivity.this, PublierActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+
+        notifs.setOnClickListener(v -> {
+            startActivity(new Intent(UserActivity.this, NotifsActivity.class));
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        });
+
         deconnexion.setOnClickListener(v -> {
                     SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
