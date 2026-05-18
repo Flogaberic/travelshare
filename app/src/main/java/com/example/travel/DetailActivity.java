@@ -1,10 +1,14 @@
 package com.example.travel;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +32,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView comsView = findViewById(R.id.detailTitle5);
         Button infos = findViewById(R.id.button12);
         Button comsBtn = findViewById(R.id.button11);
+        Button mapBtn = findViewById(R.id.button10);
 
         String url = getIntent().getStringExtra("image_url");
         String title = getIntent().getStringExtra("image_title");
@@ -38,6 +43,17 @@ public class DetailActivity extends AppCompatActivity {
         String coms = getIntent().getStringExtra("image_coms");
 
         int position = getIntent().getIntExtra("image_position", 0);
+
+        SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
+        boolean isLoggedIn = prefs.getBoolean("isLoggedIn", false);
+
+        if (!isLoggedIn) {
+            Toast.makeText(this, "Connecte-toi pour voir toutes les infos", Toast.LENGTH_SHORT).show();
+
+            infos.setVisibility(View.GONE);
+            comsBtn.setVisibility(View.GONE);
+            mapBtn.setVisibility(View.GONE);
+        }
 
         List<String[]> comments = AccueilActivity.imageComs.get(position);
 
@@ -86,6 +102,16 @@ public class DetailActivity extends AppCompatActivity {
                         "<br><br><b>Date :</b> " + date;
 
         coordView.setText(android.text.Html.fromHtml(text));
+
+        mapBtn.setOnClickListener(v -> {
+
+            String uri = "google.navigation:q=" + lat + "," + lng;
+
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setPackage("com.google.android.apps.maps");
+
+            startActivity(intent);
+        });
 
         ImageView fleche = findViewById(R.id.imageView7);
 

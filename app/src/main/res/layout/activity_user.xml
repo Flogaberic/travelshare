@@ -69,28 +69,39 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button7"
-                android:layout_width="184dp"
-                android:layout_height="43dp"
-                android:layout_marginTop="160dp"
-                android:backgroundTint="@color/white"
-                android:text="Notifications"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
                 android:id="@+id/button8"
                 android:layout_width="184dp"
                 android:layout_height="43dp"
-                android:layout_marginTop="216dp"
+                android:layout_marginTop="188dp"
                 android:backgroundTint="@color/white"
                 android:text="Groupes"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="184dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="132dp"
+                android:backgroundTint="@color/white"
+                android:text="Notifications"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.487"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button13"
+                android:layout_width="184dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="244dp"
+                android:backgroundTint="@color/vert"
+                android:text="Publier"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
